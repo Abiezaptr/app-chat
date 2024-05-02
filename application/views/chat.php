@@ -177,7 +177,7 @@
             document.getElementById('userMessage').value = '';
 
             // Kirim pertanyaan ke server dan terapkan efek pengetikan animasi pada pesan balasan
-            fetch(`http://192.168.15.67:5000/chatcompletion?question=${encodeURIComponent(userMessage)}`)
+            fetch(`http://192.168.0.178:5000/chatcompletion?question=${encodeURIComponent(userMessage)}`)
                 .then(response => response.json())
                 .then(data => {
                     const systemMessageDiv = document.createElement('div');
@@ -223,7 +223,7 @@
 
                 // Jika opsi yang dipilih adalah "AI Image", arahkan pengguna ke URL yang ditentukan
                 if (selectedOption === 'AI Image') {
-                    window.location.href = 'http://192.168.15.67/app-chat/chat/image';
+                    window.location.href = 'http://192.168.0.178/app-chat/chat/image';
                 }
             });
         });

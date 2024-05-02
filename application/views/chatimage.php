@@ -176,7 +176,7 @@
             document.getElementById('userMessage').value = '';
 
             // Kirim pertanyaan dalam bentuk JSON ke server
-            fetch('http://192.168.15.67:5000/imagechat', {
+            fetch('http://192.168.0.178:5000/imagechat', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json' // Mengatur tipe konten menjadi JSON
@@ -236,7 +236,7 @@
 
                 // Jika opsi yang dipilih adalah "AI Image", arahkan pengguna ke URL yang ditentukan
                 if (selectedOption === 'AI Text') {
-                    window.location.href = 'http://192.168.15.67/app-chat';
+                    window.location.href = 'http://192.168.0.178/app-chat';
                 }
             });
         });
