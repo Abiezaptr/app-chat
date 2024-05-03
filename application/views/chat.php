@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+
         .container {
             display: flex;
             height: 100vh;
@@ -154,105 +159,14 @@
         <div class="chat-container">
             <div class="chat" id="messages"></div>
             <div class="input-box">
-                <input type="text" id="userMessage" placeholder="Type a message...">
+                <input type="text" id="userMessage" placeholder="Type a message..." autocomplete="off">
                 <button id="sendButton">
-                    <span id="buttonText">Send</span>
+                    <span id="buttonText"><i class="fa-solid fa-arrow-up"></i></span>
                     <span id="loader" class="loader"></span>
                 </button>
             </div>
         </div>
     </div>
-
-
-    <!-- <script>
-        // Fungsi untuk efek pengetikan animasi
-        async function animationWriter(content, element) {
-            let i = 0;
-            const typingEffect = async () => {
-                if (i < content.length) {
-                    element.innerText += content.charAt(i);
-                    if (content.charAt(i) === " ") {
-                        element.innerText += "\u00A0"; // Tambahkan spasi yang tidak dapat dipatahkan untuk spasi
-                    }
-                    i++;
-                    await sleep(5); // Mengatur kecepatan pengetikan (dalam milidetik)
-                    typingEffect();
-                }
-            };
-            typingEffect();
-        }
-
-        // Fungsi untuk mengatur waktu jeda
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        // Fungsi untuk mengirim pesan
-        function sendMessage() {
-            const userMessage = document.getElementById('userMessage').value.trim();
-            const loader = document.getElementById('loader'); // Dapatkan elemen loader
-            const buttonText = document.getElementById('buttonText'); // Dapatkan elemen teks tombol
-
-            if (!userMessage) return; // Jika pesan kosong, jangan kirim
-
-            // Tampilkan loader dan sembunyikan teks tombol
-            loader.style.display = 'inline-block';
-            buttonText.style.display = 'none';
-
-            // Tambahkan pesan pengguna ke dalam daftar pesan
-            const userMessageDiv = document.createElement('div');
-            userMessageDiv.classList.add('message-container');
-            const userMessageContent = document.createElement('div');
-            userMessageContent.classList.add('user-message');
-            userMessageContent.innerText = userMessage;
-            userMessageDiv.appendChild(userMessageContent);
-            document.getElementById('messages').appendChild(userMessageDiv);
-
-            // Bersihkan input setelah mengirim pesan
-            document.getElementById('userMessage').value = '';
-
-            // Kirim pertanyaan ke server dan terapkan efek pengetikan animasi pada pesan balasan
-            fetch(`http://192.168.29.67:5000/chatcompletion?question=${encodeURIComponent(userMessage)}`)
-                .then(response => response.json())
-                .then(data => {
-                    const systemMessageDiv = document.createElement('div');
-                    systemMessageDiv.classList.add('message-container');
-                    const systemMessageContent = document.createElement('div');
-                    systemMessageContent.classList.add('system-message');
-                    systemMessageDiv.appendChild(systemMessageContent);
-                    document.getElementById('messages').appendChild(systemMessageDiv);
-                    animationWriter(data, systemMessageContent);
-                })
-                .catch(error => {
-                    console.error('Error:', error.message);
-                    const errorMessageDiv = document.createElement('div');
-                    errorMessageDiv.classList.add('message-container');
-                    const errorMessageContent = document.createElement('div');
-                    errorMessageContent.classList.add('system-message');
-                    errorMessageContent.innerText = 'Error processing request';
-                    errorMessageDiv.appendChild(errorMessageContent);
-                    document.getElementById('messages').appendChild(errorMessageDiv);
-                })
-                .finally(() => {
-                    // Sembunyikan loader dan tampilkan teks tombol
-                    loader.style.display = 'none';
-                    buttonText.style.display = 'inline';
-                    buttonText.textContent = "Send"; // Kembalikan teks tombol ke semula
-                });
-        }
-
-        // Mendaftarkan event listener untuk tombol 'Send'
-        document.getElementById('sendButton').addEventListener('click', sendMessage);
-
-        // Mendaftarkan event listener untuk input teks
-        document.getElementById('userMessage').addEventListener('keypress', function(event) {
-            // Periksa apakah tombol yang ditekan adalah tombol "Enter"
-            if (event.key === 'Enter') {
-                // Panggil fungsi sendMessage untuk mengirim pesan
-                sendMessage();
-            }
-        });
-    </script> -->
 
     <script>
         // Fungsi untuk efek pengetikan animasi
@@ -306,7 +220,7 @@
             document.getElementById('userMessage').value = '';
 
             // Kirim pertanyaan ke server dan terapkan efek pengetikan animasi pada pesan balasan
-            fetch(`http://192.168.29.67:5000/chatcompletion?question=${encodeURIComponent(userMessage)}`)
+            fetch(`http://10.107.195.96:5000/chatcompletion?question=${encodeURIComponent(userMessage)}`)
                 .then(response => response.json())
                 .then(data => {
                     const systemMessageDiv = document.createElement('div');
@@ -331,7 +245,7 @@
                     // Sembunyikan loader dan tampilkan teks tombol
                     loader.style.display = 'none';
                     buttonText.style.display = 'inline';
-                    buttonText.textContent = "Send"; // Kembalikan teks tombol ke semula
+                    buttonText.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
                 });
         }
 
@@ -366,7 +280,7 @@
 
                 // Jika opsi yang dipilih adalah "AI Image", arahkan pengguna ke URL yang ditentukan
                 if (selectedOption === 'AI Image') {
-                    window.location.href = 'http://192.168.29.67/app-chat/chat/image';
+                    window.location.href = 'http://10.107.195.96/app-chat/chat/image';
                 }
             });
         });
