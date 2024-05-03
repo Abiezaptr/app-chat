@@ -146,7 +146,7 @@
                         <option value="AI Text">Chat</option>
                         <option value="AI Image">Image</option>
                     </select>
-                    <i class="fas fa-edit" style="margin-left: 10px;" onclick="refreshPage()"></i>
+                    <i class="fas fa-edit" style="margin-left: 20px;" onclick="refreshPage()"></i>
                 </div>
             </div>
         </div>
