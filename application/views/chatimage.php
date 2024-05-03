@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Image</title>
-    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('assets/gpt.png') ?>">
+    <title>Generative AI - Image</title>
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('assets/icon.png') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
@@ -138,13 +138,13 @@
         <div class="sidebar">
             <!-- Isi Sidebar di sini -->
             <div class="image-with-text" style="display: flex; align-items: center;">
-                <img src="<?= base_url('assets/gpt.png') ?>" alt="Chat Menu" style="width: 20px; height: auto; margin-right: 10px;">
+                <img src="<?= base_url('assets/bot.png') ?>" alt="Chat Menu" style="width: 40px; height: auto; margin-right: 10px;">
                 <span style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">&nbsp;<strong>New Chat</strong></span>
                 <!-- Tambahkan elemen select di sini -->
                 <div style="margin-left: auto; display: flex; align-items: center;">
                     <select>
-                        <option value="AI Image">AI Image</option>
-                        <option value="AI Text">AI Text</option>
+                        <option value="AI Image">Image</option>
+                        <option value="AI Text">Chat</option>
                     </select>
                     <i class="fas fa-edit" style="margin-left: 10px;" onclick="refreshPage()"></i>
                 </div>
@@ -276,7 +276,7 @@
 
                 // Jika opsi yang dipilih adalah "AI Image", arahkan pengguna ke URL yang ditentukan
                 if (selectedOption === 'AI Text') {
-                    window.location.href = 'http://192.168.0.178/app-chat';
+                    window.location.href = 'http://192.168.29.67/app-chat';
                 }
             });
         });

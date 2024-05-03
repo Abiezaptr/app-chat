@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Chat</title>
-    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('assets/gpt.png') ?>">
+    <title>Generative AI - Chat</title>
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('assets/icon.png') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
@@ -138,13 +138,13 @@
         <div class="sidebar">
             <!-- Isi Sidebar di sini -->
             <div class="image-with-text" style="display: flex; align-items: center;">
-                <img src="<?= base_url('assets/gpt.png') ?>" alt="Chat Menu" style="width: 20px; height: auto; margin-right: 10px;">
+                <img src="<?= base_url('assets/bot.png') ?>" alt="Chat Menu" style="width: 40px; height: auto; margin-right: 10px;">
                 <span style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">&nbsp;<strong>New Chat</strong></span>
                 <!-- Tambahkan elemen select di sini -->
                 <div style="margin-left: auto; display: flex; align-items: center;">
                     <select>
-                        <option value="AI Text">Chatbot</option>
-                        <option value="AI Image">Image Chat</option>
+                        <option value="AI Text">Chat</option>
+                        <option value="AI Image">Image</option>
                     </select>
                     <i class="fas fa-edit" style="margin-left: 10px;" onclick="refreshPage()"></i>
                 </div>
