@@ -105,6 +105,31 @@
             border: 1px solid #ccc;
             border-radius: 10px;
         }
+
+        #loader {
+            display: none;
+            /* Mulai dengan menyembunyikan loader */
+            border: 3px solid #f3f3f3;
+            /* Light grey */
+            border-top: 3px solid #3498db;
+            /* Blue */
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
@@ -130,7 +155,11 @@
             <div class="chat" id="messages"></div>
             <div class="input-box">
                 <input type="text" id="userMessage" placeholder="Type a message...">
-                <button id="sendButton">Send</button>
+                <button id="sendButton">
+                    <span id="buttonText">Send</span>
+                    <span id="loader" class="loader"></span>
+                </button>
+
             </div>
         </div>
     </div>
@@ -160,8 +189,14 @@
 
         function sendMessage() {
             const userMessage = document.getElementById('userMessage').value.trim();
+            const loader = document.getElementById('loader'); // Dapatkan elemen loader
+            const buttonText = document.getElementById('buttonText'); // Dapatkan elemen teks tombol
 
             if (!userMessage) return; // Jika pesan kosong, jangan kirim
+
+            // Tampilkan loader dan sembunyikan teks tombol
+            loader.style.display = 'inline-block';
+            buttonText.style.display = 'none';
 
             // Tambahkan pesan pengguna ke dalam daftar pesan
             const userMessageDiv = document.createElement('div');
@@ -176,7 +211,7 @@
             document.getElementById('userMessage').value = '';
 
             // Kirim pertanyaan dalam bentuk JSON ke server
-            fetch('http://192.168.0.178:5000/imagechat', {
+            fetch('http://192.168.29.67:5000/imagechat', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json' // Mengatur tipe konten menjadi JSON
@@ -210,6 +245,12 @@
                     errorMessageContent.innerText = 'Error processing request';
                     errorMessageDiv.appendChild(errorMessageContent);
                     document.getElementById('messages').appendChild(errorMessageDiv);
+                })
+                .finally(() => {
+                    // Sembunyikan loader dan tampilkan teks tombol
+                    loader.style.display = 'none';
+                    buttonText.style.display = 'inline';
+                    buttonText.textContent = "Send"; // Kembalikan teks tombol ke semula
                 });
         }
 

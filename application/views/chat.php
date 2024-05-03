@@ -223,7 +223,7 @@
 
                 // Jika opsi yang dipilih adalah "AI Image", arahkan pengguna ke URL yang ditentukan
                 if (selectedOption === 'AI Image') {
-                    window.location.href = 'http://192.168.0.178/app-chat/chat/image';
+                    window.location.href = 'http://192.168.29.67/app-chat/chat/image';
                 }
             });
         });
