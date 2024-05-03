@@ -164,7 +164,7 @@
     </div>
 
 
-    <script>
+    <!-- <script>
         // Fungsi untuk efek pengetikan animasi
         async function animationWriter(content, element) {
             let i = 0;
@@ -252,7 +252,109 @@
                 sendMessage();
             }
         });
+    </script> -->
+
+    <script>
+        // Fungsi untuk efek pengetikan animasi
+        async function animationWriter(content, element, callback) {
+            let i = 0;
+            const typingEffect = async () => {
+                if (i < content.length) {
+                    element.innerText += content.charAt(i);
+                    if (content.charAt(i) === " ") {
+                        element.innerText += "\u00A0"; // Tambahkan spasi yang tidak dapat dipatahkan untuk spasi
+                    }
+                    i++;
+                    await sleep(5); // Mengatur kecepatan pengetikan (dalam milidetik)
+                    typingEffect();
+                } else {
+                    if (callback) callback(); // Panggil callback setelah efek pengetikan selesai
+                }
+            };
+            typingEffect();
+        }
+
+        // Fungsi untuk mengatur waktu jeda
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Fungsi untuk mengirim pesan
+        function sendMessage() {
+            const userMessage = document.getElementById('userMessage').value.trim();
+            const loader = document.getElementById('loader'); // Dapatkan elemen loader
+            const buttonText = document.getElementById('buttonText'); // Dapatkan elemen teks tombol
+
+            if (!userMessage) return; // Jika pesan kosong, jangan kirim
+
+            // Tampilkan loader dan sembunyikan teks tombol
+            loader.style.display = 'inline-block';
+            buttonText.style.display = 'none';
+
+            // Tambahkan pesan pengguna ke dalam daftar pesan
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.classList.add('message-container');
+            const userMessageContent = document.createElement('div');
+            userMessageContent.classList.add('user-message');
+            userMessageDiv.appendChild(userMessageContent);
+            document.getElementById('messages').appendChild(userMessageDiv);
+
+            // Menciptakan efek pengetikan pada pesan pengguna
+            animationWriter(userMessage, userMessageContent, scrollToBottom);
+
+            // Bersihkan input setelah mengirim pesan
+            document.getElementById('userMessage').value = '';
+
+            // Kirim pertanyaan ke server dan terapkan efek pengetikan animasi pada pesan balasan
+            fetch(`http://192.168.29.67:5000/chatcompletion?question=${encodeURIComponent(userMessage)}`)
+                .then(response => response.json())
+                .then(data => {
+                    const systemMessageDiv = document.createElement('div');
+                    systemMessageDiv.classList.add('message-container');
+                    const systemMessageContent = document.createElement('div');
+                    systemMessageContent.classList.add('system-message');
+                    systemMessageDiv.appendChild(systemMessageContent);
+                    document.getElementById('messages').appendChild(systemMessageDiv);
+                    animationWriter(data, systemMessageContent, scrollToBottom);
+                })
+                .catch(error => {
+                    console.error('Error:', error.message);
+                    const errorMessageDiv = document.createElement('div');
+                    errorMessageDiv.classList.add('message-container');
+                    const errorMessageContent = document.createElement('div');
+                    errorMessageContent.classList.add('system-message');
+                    errorMessageContent.innerText = 'Error processing request';
+                    errorMessageDiv.appendChild(errorMessageContent);
+                    document.getElementById('messages').appendChild(errorMessageDiv);
+                })
+                .finally(() => {
+                    // Sembunyikan loader dan tampilkan teks tombol
+                    loader.style.display = 'none';
+                    buttonText.style.display = 'inline';
+                    buttonText.textContent = "Send"; // Kembalikan teks tombol ke semula
+                });
+        }
+
+        // Fungsi untuk mengarahkan scroll ke bagian bawah
+        function scrollToBottom() {
+            const chatContainer = document.querySelector('.chat');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Mendaftarkan event listener untuk tombol 'Send'
+        document.getElementById('sendButton').addEventListener('click', sendMessage);
+
+        // Mendaftarkan event listener untuk input teks
+        document.getElementById('userMessage').addEventListener('keypress', function(event) {
+            // Periksa apakah tombol yang ditekan adalah tombol "Enter"
+            if (event.key === 'Enter') {
+                // Panggil fungsi sendMessage untuk mengirim pesan
+                sendMessage();
+                event.preventDefault();
+            }
+        });
     </script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
