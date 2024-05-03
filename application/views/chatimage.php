@@ -159,7 +159,6 @@
                     <span id="buttonText">Send</span>
                     <span id="loader" class="loader"></span>
                 </button>
-
             </div>
         </div>
     </div>
